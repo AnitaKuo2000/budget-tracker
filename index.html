@@ -3,56 +3,88 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#111827" />
+<meta name="theme-color" content="#ffffff" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Budget" />
 <meta name="mobile-web-app-capable" content="yes" />
 <link rel="manifest" href="manifest.json" />
 <link rel="apple-touch-icon" href="icon-180.png" />
 <title>Budget</title>
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--good:#047857;--bad:#b91c1c;--accent:#2563eb}
+:root{
+  --bg:#ffffff;
+  --card:#ffffff;
+  --text:#3f4542;
+  --muted:#858b87;
+  --line:#e8e5df;
+  --soft:#f6f4f0;
+  --sage:#8f9b8d;
+  --sage-dark:#6f7d6d;
+  --dusty:#b69b98;
+  --taupe:#a89e93;
+  --blue:#8e9aa8;
+  --good:#738b78;
+  --bad:#ad7774;
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:var(--bg)}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overscroll-behavior-y:none}
+html{background:#fff}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;background:#fff;color:var(--text);min-height:100vh;min-height:100dvh;overscroll-behavior-y:none}
 .wrap{max-width:760px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 14px calc(60px + env(safe-area-inset-bottom))}
-.title{font-size:28px;font-weight:800;margin:6px 0 4px}.sub{color:var(--muted);margin-bottom:18px;line-height:1.45}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 4px 18px rgba(0,0,0,.04)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{padding:12px;border-radius:14px;background:#f9fafb}.metric b{display:block;font-size:22px;margin-top:3px}.metric span{font-size:12px;color:var(--muted)}
-label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}input,button{font:inherit}input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:white;font-size:16px;color:var(--text)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:12px;padding:12px 14px;background:var(--accent);color:#fff;font-weight:700;min-height:46px}.btn.secondary{background:#111827}.btn.danger{background:#fff;color:var(--bad);border:1px solid #fecaca}
-.entry{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.entry .date{font-weight:700}.entry .note{color:var(--muted);font-size:13px;line-height:1.5}.money{font-weight:800}.good{color:var(--good)!important}.bad{color:var(--bad)!important}
-.small{font-size:12px;color:var(--muted);line-height:1.45}.bar{height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin-top:8px}.fill{height:100%;background:#2563eb;width:0%}
-.install-hint{display:none}
+.title{font-size:28px;font-weight:800;margin:6px 0 4px;letter-spacing:-.02em}.sub{color:var(--muted);margin-bottom:18px;line-height:1.45}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 4px 18px rgba(67,61,53,.045)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:13px;border-radius:14px;background:var(--soft);min-width:0}.metric b{display:block;font-size:22px;margin-top:3px;overflow-wrap:anywhere}.metric span{font-size:12px;color:var(--muted)}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}input,button,select{font:inherit}input,select{width:100%;max-width:100%;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:white;font-size:16px;color:var(--text);outline:none}input:focus,select:focus{border-color:#c9c3ba;box-shadow:0 0 0 3px rgba(168,158,147,.12)}
+input[type="date"]{display:block;min-width:0!important;max-width:100%!important;width:100%!important;-webkit-appearance:none;appearance:none}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.row>div{min-width:0}
+.btn{border:0;border-radius:12px;padding:12px 14px;background:var(--sage);color:#fff;font-weight:700;min-height:46px}.btn:active{transform:translateY(1px)}.btn.secondary{background:var(--blue)}.btn.ghost{background:var(--soft);color:var(--text);border:1px solid var(--line)}.btn.danger{background:#fff;color:var(--bad);border:1px solid #ead4d2}
+.month-nav{display:grid;grid-template-columns:46px 1fr 46px;gap:8px;align-items:center}.month-title{text-align:center;font-weight:800;font-size:18px}.month-tools{display:flex;gap:8px;margin-top:10px}.month-tools .btn{flex:1}
+.entry{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.entry>div:first-child{min-width:0}.entry .date{font-weight:700}.entry .note{color:var(--muted);font-size:13px;line-height:1.5;overflow-wrap:anywhere}.money{font-weight:800}.good{color:var(--good)!important}.bad{color:var(--bad)!important}
+.small{font-size:12px;color:var(--muted);line-height:1.45}.bar{height:10px;border-radius:999px;background:#eeeae4;overflow:hidden;margin-top:8px}.fill{height:100%;background:var(--sage);width:0%;transition:width .2s ease}
+.install-hint{display:none}.section-title{margin:0 0 12px;font-size:18px}
+.year-row{display:grid;grid-template-columns:68px 1fr 1fr 1fr;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}.year-row.header{font-size:11px;color:var(--muted);font-weight:700}.year-row:last-child{border-bottom:0}.year-row div:not(:first-child){text-align:right}.year-row.current{background:var(--soft);margin:0 -8px;padding:9px 8px;border-radius:10px}
 @media(display-mode:standalone){.install-hint{display:none!important}}
-@media(max-width:520px){.grid,.row{grid-template-columns:1fr}.title{font-size:24px}.wrap{padding-left:12px;padding-right:12px}.card{border-radius:16px}}
+@media(max-width:520px){
+  .grid,.row{grid-template-columns:1fr}.title{font-size:24px}.wrap{padding-left:12px;padding-right:12px}.card{border-radius:16px;padding:14px}
+  input,select{font-size:16px;min-width:0;max-width:100%;width:100%}
+  .month-title{font-size:17px}.year-row{grid-template-columns:58px 1fr 1fr 1fr;gap:5px;font-size:12px}
+}
 </style>
 </head>
 <body><div class="wrap">
 <div class="title">Budget Tracker</div>
-<div class="sub">月預算 → 每日額度 → 每日花費 → 週/月平均。沒花掉的額度會自動累積成「賺到」。</div>
+<div class="sub">每個月獨立記錄 Budget、固定費用與支出。沒花掉的每日額度會顯示成「賺到」，超支也會照實扣除。</div>
 
 <div class="card install-hint" id="installHint"><div class="small">在 iPhone Safari 點「分享」→「加入主畫面」，之後可全螢幕開啟。</div></div>
 
 <div class="card">
+  <div class="month-nav">
+    <button class="btn ghost" id="prevMonth" aria-label="上一個月">‹</button>
+    <div class="month-title" id="monthTitle"></div>
+    <button class="btn ghost" id="nextMonth" aria-label="下一個月">›</button>
+  </div>
+  <div class="month-tools"><button class="btn ghost" id="goCurrent">回到本月</button></div>
+</div>
+
+<div class="card">
+  <h3 class="section-title">本月設定</h3>
   <div class="row">
     <div><label>每月 Budget ($)</label><input id="budget" type="number" min="0" step="0.01" value="1000" inputmode="decimal"></div>
-    <div><label>本月固定費用，例如水電網 ($)</label><input id="fixed" type="number" min="0" step="0.01" value="200" inputmode="decimal"></div>
+    <div><label>固定費用，例如水電網 ($)</label><input id="fixed" type="number" min="0" step="0.01" value="200" inputmode="decimal"></div>
   </div>
-  <div style="margin-top:10px"><button class="btn secondary" id="saveSettings">儲存設定</button></div>
-  <div class="small" style="margin-top:8px">每日額度 =（月 Budget − 固定費用）÷ 當月天數</div>
+  <div style="margin-top:10px"><button class="btn secondary" id="saveSettings">儲存這個月設定</button></div>
+  <div class="small" style="margin-top:8px">每日額度 =（這個月 Budget − 固定費用）÷ 當月天數。每個月的設定會分開保存。</div>
 </div>
 
 <div class="card"><div class="grid">
-  <div class="metric"><span>本月每日額度</span><b id="dailyAllowance">$0</b></div>
-  <div class="metric"><span>今天已花</span><b id="todaySpent">$0</b></div>
-  <div class="metric"><span>今天賺到 / 超支</span><b id="todayDelta">$0</b></div>
+  <div class="metric"><span>每日額度</span><b id="dailyAllowance">$0</b></div>
+  <div class="metric"><span id="spentLabel">今天已花</span><b id="todaySpent">$0</b></div>
+  <div class="metric"><span id="deltaLabel">今天賺到 / 超支</span><b id="todayDelta">$0</b></div>
   <div class="metric"><span>本月剩餘可用</span><b id="remaining">$0</b></div>
 </div><div class="bar"><div class="fill" id="progress"></div></div></div>
 
 <div class="card">
-  <h3 style="margin-top:0">新增花費</h3>
+  <h3 class="section-title">新增花費</h3>
   <div class="row">
     <div><label>日期</label><input id="date" type="date"></div>
     <div><label>金額 ($)</label><input id="amount" type="number" min="0" step="0.01" placeholder="13.22" inputmode="decimal"></div>
@@ -68,36 +100,93 @@ label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}input,bu
   <div class="metric"><span>本月總花費</span><b id="monthTotal">$0</b></div>
 </div></div>
 
-<div class="card"><h3 style="margin-top:0">每日紀錄</h3><div id="entries"></div></div>
-<div class="card"><button class="btn danger" id="clearMonth">清除本月紀錄</button><div class="small" style="margin-top:8px">資料只存在你這台裝置的瀏覽器 Local Storage，不會上傳。</div></div>
+<div class="card"><h3 class="section-title">每日紀錄</h3><div id="entries"></div></div>
+
+<div class="card">
+  <h3 class="section-title"><span id="yearTitle"></span> 年度總覽</h3>
+  <div class="year-row header"><div>月份</div><div>Budget</div><div>已花</div><div>結餘</div></div>
+  <div id="yearOverview"></div>
+</div>
+
+<div class="card"><button class="btn danger" id="clearMonth">清除這個月紀錄</button><div class="small" style="margin-top:8px">資料只存在這台裝置的瀏覽器 Local Storage，不會上傳。若清除網站資料或更換網址，Local Storage 也可能被清除。</div></div>
 </div>
 <script>
-const $=id=>document.getElementById(id);const key='budgetTrackerV1';
-function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-function load(){try{return JSON.parse(localStorage.getItem(key)||'{"budget":1000,"fixed":200,"entries":[]}')}catch{return {budget:1000,fixed:200,entries:[]}}}
+const $=id=>document.getElementById(id);
+const key='budgetTrackerV2', oldKey='budgetTrackerV1';
+let viewDate=new Date(); viewDate.setDate(1);
+function pad(n){return String(n).padStart(2,'0')}
+function todayISO(){const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function monthKey(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}`}
+function dateMonthKey(ds){return String(ds||'').slice(0,7)}
+function defaultState(){return {defaultBudget:1000,defaultFixed:200,months:{},entries:[]}}
+function load(){
+  try{
+    const v2=localStorage.getItem(key); if(v2) return normalize(JSON.parse(v2));
+    const old=localStorage.getItem(oldKey);
+    if(old){
+      const o=JSON.parse(old), s=defaultState();
+      s.defaultBudget=Number(o.budget)||1000; s.defaultFixed=Number(o.fixed)||200; s.entries=Array.isArray(o.entries)?o.entries:[];
+      const months=new Set(s.entries.map(e=>dateMonthKey(e.date)).filter(Boolean)); months.add(monthKey(new Date()));
+      months.forEach(m=>s.months[m]={budget:s.defaultBudget,fixed:s.defaultFixed});
+      save(s); return s;
+    }
+  }catch(e){}
+  return defaultState();
+}
+function normalize(s){s=s||defaultState();s.defaultBudget=Number(s.defaultBudget??1000);s.defaultFixed=Number(s.defaultFixed??200);s.months=s.months||{};s.entries=Array.isArray(s.entries)?s.entries:[];return s}
 function save(s){localStorage.setItem(key,JSON.stringify(s))}
 function money(n){return '$'+Number(n||0).toFixed(2)}
-function daysInMonth(d=new Date()){return new Date(d.getFullYear(),d.getMonth()+1,0).getDate()}
-function sameMonth(ds,d=new Date()){const x=new Date(ds+'T12:00:00');return x.getFullYear()===d.getFullYear()&&x.getMonth()===d.getMonth()}
-function render(){const s=load();$('budget').value=s.budget;$('fixed').value=s.fixed;$('date').value=$('date').value||todayISO();
- const now=new Date(), dim=daysInMonth(now), spendable=Math.max(0,s.budget-s.fixed), allowance=spendable/dim;
- const monthEntries=s.entries.filter(e=>sameMonth(e.date,now)); const monthTotal=monthEntries.reduce((a,e)=>a+Number(e.amount),0);
- const today=todayISO(); const todaySpent=monthEntries.filter(e=>e.date===today).reduce((a,e)=>a+Number(e.amount),0); const delta=allowance-todaySpent;
- const dayOfMonth=now.getDate(); const monthAvg=dayOfMonth?monthTotal/dayOfMonth:0;
- const start7=new Date(now); start7.setHours(0,0,0,0); start7.setDate(start7.getDate()-6);
- const endToday=new Date(now); endToday.setHours(23,59,59,999);
- const weekEntries=s.entries.filter(e=>{const d=new Date(e.date+'T12:00:00');return d>=start7&&d<=endToday}); const weekTotal=weekEntries.reduce((a,e)=>a+Number(e.amount),0); const weekAvg=weekTotal/7;
- $('dailyAllowance').textContent=money(allowance);$('todaySpent').textContent=money(todaySpent);$('todayDelta').textContent=(delta>=0?'+':'-')+money(Math.abs(delta));$('todayDelta').className=delta>=0?'good':'bad';
- const remaining=spendable-monthTotal;$('remaining').textContent=money(remaining);$('remaining').className=remaining>=0?'good':'bad';$('weekAvg').textContent=money(weekAvg);$('monthAvg').textContent=money(monthAvg);$('weekTotal').textContent=money(weekTotal);$('monthTotal').textContent=money(monthTotal);
- $('progress').style.width=Math.min(100,spendable?monthTotal/spendable*100:0)+'%';
- const byDay={};monthEntries.forEach(e=>{(byDay[e.date]??=[]).push(e)}); const dates=Object.keys(byDay).sort().reverse();
- $('entries').innerHTML=dates.length?'':`<div class="small">本月還沒有紀錄。</div>`;
- dates.forEach(dt=>{const total=byDay[dt].reduce((a,e)=>a+Number(e.amount),0), diff=allowance-total;const div=document.createElement('div');div.className='entry';div.innerHTML=`<div><div class="date">${dt}</div><div class="note">${byDay[dt].map(e=>`${escapeHtml(e.note||'Expense')} ${money(e.amount)}`).join(' · ')}</div></div><div style="text-align:right"><div class="money">${money(total)}</div><div class="small ${diff>=0?'good':'bad'}">${diff>=0?'賺到 ':'超支 '}${money(Math.abs(diff))}</div></div>`;$('entries').appendChild(div)});
-}
+function daysInMonth(d){return new Date(d.getFullYear(),d.getMonth()+1,0).getDate()}
+function getSettings(s,mk){return s.months[mk]||{budget:s.defaultBudget,fixed:s.defaultFixed}}
+function formatMonth(d){return `${d.getFullYear()} 年 ${d.getMonth()+1} 月`}
 function escapeHtml(str){return String(str).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-$('saveSettings').onclick=()=>{const s=load();s.budget=Number($('budget').value)||0;s.fixed=Number($('fixed').value)||0;save(s);render()};
-$('add').onclick=()=>{const a=Number($('amount').value);if(!a||a<0)return alert('請輸入花費金額');const s=load();s.entries.push({id:Date.now(),date:$('date').value||todayISO(),amount:a,note:$('note').value.trim()});save(s);$('amount').value='';$('note').value='';render()};
-$('clearMonth').onclick=()=>{if(!confirm('確定要清除本月所有紀錄嗎？'))return;const s=load();s.entries=s.entries.filter(e=>!sameMonth(e.date,new Date()));save(s);render()};
+function referenceDay(d){
+  const now=new Date();
+  if(d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth()) return now.getDate();
+  const selectedEnd=new Date(d.getFullYear(),d.getMonth()+1,0);
+  if(selectedEnd<now) return selectedEnd.getDate();
+  return 1;
+}
+function render(){
+  const s=load(), mk=monthKey(viewDate), cfg=getSettings(s,mk), dim=daysInMonth(viewDate);
+  $('monthTitle').textContent=formatMonth(viewDate); $('yearTitle').textContent=viewDate.getFullYear();
+  $('budget').value=cfg.budget; $('fixed').value=cfg.fixed;
+  const currentMk=monthKey(new Date()), isCurrent=mk===currentMk;
+  if(!$('date').value || dateMonthKey($('date').value)!==mk){ $('date').value=isCurrent?todayISO():`${mk}-01`; }
+  const spendable=Math.max(0,Number(cfg.budget)-Number(cfg.fixed)), allowance=spendable/dim;
+  const monthEntries=s.entries.filter(e=>dateMonthKey(e.date)===mk), monthTotal=monthEntries.reduce((a,e)=>a+Number(e.amount),0);
+  const refDay=referenceDay(viewDate), refDate=`${mk}-${pad(refDay)}`;
+  const refSpent=monthEntries.filter(e=>e.date===refDate).reduce((a,e)=>a+Number(e.amount),0), delta=allowance-refSpent;
+  const avgDays=isCurrent?new Date().getDate():dim, monthAvg=avgDays?monthTotal/avgDays:0;
+  const ref=new Date(refDate+'T12:00:00'), start7=new Date(ref); start7.setDate(start7.getDate()-6); const end7=new Date(ref); end7.setHours(23,59,59,999);
+  const weekEntries=monthEntries.filter(e=>{const d=new Date(e.date+'T12:00:00');return d>=start7&&d<=end7}); const weekTotal=weekEntries.reduce((a,e)=>a+Number(e.amount),0), weekAvg=weekTotal/7;
+  $('dailyAllowance').textContent=money(allowance); $('todaySpent').textContent=money(refSpent);
+  $('spentLabel').textContent=isCurrent?'今天已花':`${viewDate.getMonth()+1}/${refDay} 已花`;
+  $('deltaLabel').textContent=isCurrent?'今天賺到 / 超支':`${viewDate.getMonth()+1}/${refDay} 賺到 / 超支`;
+  $('todayDelta').textContent=(delta>=0?'+':'-')+money(Math.abs(delta)); $('todayDelta').className=delta>=0?'good':'bad';
+  const remaining=spendable-monthTotal; $('remaining').textContent=money(remaining); $('remaining').className=remaining>=0?'good':'bad';
+  $('weekAvg').textContent=money(weekAvg); $('monthAvg').textContent=money(monthAvg); $('weekTotal').textContent=money(weekTotal); $('monthTotal').textContent=money(monthTotal);
+  $('progress').style.width=Math.min(100,spendable?Math.max(0,monthTotal/spendable*100):0)+'%';
+  const byDay={}; monthEntries.forEach(e=>{(byDay[e.date]??=[]).push(e)}); const dates=Object.keys(byDay).sort().reverse();
+  $('entries').innerHTML=dates.length?'':'<div class="small">這個月還沒有紀錄。</div>';
+  dates.forEach(dt=>{const total=byDay[dt].reduce((a,e)=>a+Number(e.amount),0), diff=allowance-total;const div=document.createElement('div');div.className='entry';div.innerHTML=`<div><div class="date">${dt}</div><div class="note">${byDay[dt].map(e=>`${escapeHtml(e.note||'Expense')} ${money(e.amount)}`).join(' · ')}</div></div><div style="text-align:right;white-space:nowrap"><div class="money">${money(total)}</div><div class="small ${diff>=0?'good':'bad'}">${diff>=0?'賺到 ':'超支 '}${money(Math.abs(diff))}</div></div>`;$('entries').appendChild(div)});
+  renderYear(s,viewDate.getFullYear(),currentMk);
+}
+function renderYear(s,year,currentMk){
+  const host=$('yearOverview'); host.innerHTML='';
+  for(let m=1;m<=12;m++){
+    const mk=`${year}-${pad(m)}`, cfg=getSettings(s,mk), total=s.entries.filter(e=>dateMonthKey(e.date)===mk).reduce((a,e)=>a+Number(e.amount),0), spendable=Math.max(0,Number(cfg.budget)-Number(cfg.fixed)), balance=spendable-total;
+    const row=document.createElement('div'); row.className='year-row'+(mk===currentMk?' current':'');
+    row.innerHTML=`<div>${m} 月</div><div>${money(cfg.budget)}</div><div>${money(total)}</div><div class="${balance>=0?'good':'bad'}">${money(balance)}</div>`;
+    row.onclick=()=>{viewDate=new Date(year,m-1,1);render();window.scrollTo({top:0,behavior:'smooth'})}; host.appendChild(row);
+  }
+}
+$('prevMonth').onclick=()=>{viewDate.setMonth(viewDate.getMonth()-1);render()};
+$('nextMonth').onclick=()=>{viewDate.setMonth(viewDate.getMonth()+1);render()};
+$('goCurrent').onclick=()=>{viewDate=new Date();viewDate.setDate(1);render()};
+$('saveSettings').onclick=()=>{const s=load(),mk=monthKey(viewDate),b=Number($('budget').value)||0,f=Number($('fixed').value)||0;s.months[mk]={budget:b,fixed:f}; if(mk===monthKey(new Date())){s.defaultBudget=b;s.defaultFixed=f} save(s);render()};
+$('add').onclick=()=>{const a=Number($('amount').value);if(!a||a<0)return alert('請輸入花費金額');const date=$('date').value||todayISO(),s=load();s.entries.push({id:Date.now(),date,amount:a,note:$('note').value.trim()});const emk=dateMonthKey(date);if(!s.months[emk]){const cfg=getSettings(s,emk);s.months[emk]={budget:cfg.budget,fixed:cfg.fixed}}save(s);$('amount').value='';$('note').value='';viewDate=new Date(date+'T12:00:00');viewDate.setDate(1);render()};
+$('clearMonth').onclick=()=>{const mk=monthKey(viewDate);if(!confirm(`確定要清除 ${formatMonth(viewDate)} 的所有花費紀錄嗎？`))return;const s=load();s.entries=s.entries.filter(e=>dateMonthKey(e.date)!==mk);save(s);render()};
 if(!window.matchMedia('(display-mode: standalone)').matches && !navigator.standalone){$('installHint').style.display='block'}
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
 render();
